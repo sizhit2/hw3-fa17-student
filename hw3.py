@@ -32,7 +32,8 @@
 #              [3, 6, 9]]
 # 
 def matrix_transpose(A):
-    pass
+   B = [ list(x) for x in zip(* A)]
+   return B
 
 
 
@@ -58,7 +59,7 @@ def matrix_transpose(A):
 #             -100
 # 
 def max_2d_array(grid):
-    pass
+    return max([max(i) for i in grid])
 
 
 
@@ -87,7 +88,8 @@ def max_2d_array(grid):
 #             None
 # 
 def binary_search(arr, target):
-    pass
+    return arr.index(target) if target in arr else None
+
 
 
 
@@ -122,7 +124,11 @@ def binary_search(arr, target):
 #             None
 # 
 def search_2d_array(arr, target):
-    pass
+    for i in arr:
+        if target in i:
+            return [arr.index(i), i.index(target)]
+    return None
+
 
 
 
@@ -146,7 +152,17 @@ def search_2d_array(arr, target):
 #             6
 # 
 def max_sum_subarray(arr):
-    pass
+    check = 0
+    max_sum = sum(arr)
+    subarray = []
+    for w in range(1,len(arr)+1):
+        for i in range(len(arr)-w+1):
+            subarray = arr[i:i+w]
+            check = sum(subarray)
+            if (max_sum < check):
+                max_sum = check
+    return max_sum
+
 
 
 
@@ -206,4 +222,19 @@ def max_sum_subrectangle(grid):
 #             0
 # 
 def max_array_flatten(arr):
-    pass
+    flatten = 0
+    done = False
+    check_flatten = []
+    while (not done):
+        for item in arr:
+            if type(item) is list:
+                check_flatten.extend(item)
+            else:
+                check_flatten.append(item)
+        flatten += 1
+        for edit_item in check_flatten:
+            if type(edit_item) is list:
+                done = False
+                break
+        done = True
+    print(flatten)
